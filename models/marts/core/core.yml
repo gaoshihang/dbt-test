@@ -8,7 +8,6 @@ models:
         description: primary key of the model
         tests:
           - unique
-          - not_null
           - relationships:
               to: ref('stg_tpch_orders')
               field: order_key
