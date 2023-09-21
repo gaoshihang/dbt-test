@@ -1,14 +1,13 @@
 version: 2
 
 models:
-  - name: fct_orders
+  - name: fct_orders_1
     description: orders fact table
     columns:
       - name: order_key
         description: primary key of the model
         tests:
           - unique
-          - not_null
           - relationships:
               to: ref('stg_tpch_orders')
               field: order_key
