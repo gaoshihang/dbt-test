@@ -1,0 +1,9 @@
+version: 2
+sources:
+  - name: hoover
+    description: source hoover data
+    database: pgao_test
+    schema: test_iceberg
+    tables:
+      - name: COST_REPORT_ACK_MID_TABLE
+        description: source hoover ack table
