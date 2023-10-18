@@ -5,5 +5,5 @@ sources:
     database: pgao_test
     schema: test_iceberg
     tables:
-      - name: COST_REPORT_ACK_MID_TABLE
+      - name: COST_REPORT_ACK_MID_WITH_BATCHID_TABLE
         description: source hoover ack table
