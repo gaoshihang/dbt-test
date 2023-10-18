@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: f_billing_hourly
+    columns:
+      - name: network_id
+      - name: content_owner_id
+      - name: distributor_id
+      - name: reseller_id
+      - name: transaction_type
+      - name: traffic_type
+      - name: placement_id
+      - name: ad_id
+      - name: creative_id
+      - name: rendition_id
+      - name: ad_unit_id
+      - name: ad_type
+      - name: time_position_class
+      - name: outbound_mrm_rule_id
+      - name: inbound_mrm_rule_id
+      - name: bit_flag
+      - name: ad_views
+      - name: clicks
+      - name: no_ad_views
+      - name: revenue
+      - name: reseller_revenue
+      - name: content_owner_fee
+      - name: distributor_fee
+      - name: process_batch_id
+      - name: event_date

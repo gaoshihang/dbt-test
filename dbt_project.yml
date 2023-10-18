@@ -33,9 +33,6 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
   snowflake_workshop:
-    staging:
+    aggregate:
       materialized: view
-      snowflake_warehouse: WH_USER_PGAO_XS
-    marts:
-      materialized: table
       snowflake_warehouse: WH_USER_PGAO_XS
