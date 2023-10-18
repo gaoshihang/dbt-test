@@ -1,7 +1,7 @@
-{{ config(materialized='table') }}
+{{ config(materialized='incremental') }}
 
-with source as (
-    select * from {{ source('hoover', 'COST_REPORT_ACK_MID_TABLE') }}
+with ack_source as (
+    select * from {{ source('hoover', 'COST_REPORT_ACK_MID_WITH_BATCHID_TABLE') }}
 ),
 
 f_billing_hourly as (
@@ -35,11 +35,13 @@ f_billing_hourly as (
         , sum(coalesce(partner.value:reseller_revenue, 0.0) * coalesce(ack:metrics.fire_event_revenue_ratio, 0))                 as reseller_revenue
         , sum(coalesce(partner.value:content_owner_revenue, 0.0) * coalesce(ack:metrics.fire_event_revenue_ratio, 0))            as content_owner_fee
         , sum(coalesce(partner.value:distributor_revenue, 0.0) * coalesce(ack:metrics.fire_event_revenue_ratio, 0))              as distributor_fee
-        , '20231224010000'                                                                                           as process_batch_id
+        , process_batch_id                                                                                           as process_batch_id
         , date_trunc('HOUR', cast(ack:timestamp as TIMESTAMP))                                                             as event_date
-    from source
+    from ack_source
             ,lateral flatten(input => partners) as partner
-    where coalesce(partner.value:role, '') in ('CRO', 'R', 'D')
+    where 
+      process_batch_id = {{ var('var_current_batch_id') }}
+      and coalesce(partner.value:role, '') in ('CRO', 'R', 'D')
       and (ack:is_private_impression = false or partner.value:network_is_ad_owner = true or partner.value:network_is_extra_item_owner = true)
       and ack:ack_entity_type = 'ad'
     group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 24, 25
