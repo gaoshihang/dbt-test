@@ -188,6 +188,12 @@ models:
       - name: reseller_id
       - name: transaction_type
       - name: traffic_type
+        tests:
+          - not_null
+          - unique
+          - accepted_values:
+              values: ['CRO']
+       
       - name: placement_id
       - name: ad_id
       - name: creative_id
