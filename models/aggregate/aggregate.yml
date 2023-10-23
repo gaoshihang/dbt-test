@@ -2,6 +2,7 @@ version: 2
 
 models:
   - name: f_domain_reseller_sold_ni_opportunity_hourly
+    description: table f_domain_reseller_sold_ni_opportunity_hourly, rely on table f_order_hourly
     columns:
       - name: process_batch_id
       - name: network_id
@@ -28,6 +29,7 @@ models:
       - name: event_date
 
   - name: f_order_hourly
+    description: table f_order_hourly
     columns:
       - name: process_batch_id
       - name: network_id
@@ -181,6 +183,7 @@ models:
       - name: event_date
 
   - name: f_billing_hourly
+    description: table f_billing_hourly
     columns:
       - name: network_id
       - name: content_owner_id
